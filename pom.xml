@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.kaziyas</groupId>
+    <artifactId>rest-with-jaxrs-jersey</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>rest-with-jaxrs-jersey</name>
+    <packaging>pom</packaging>
+
+    <!--Developer contact details -->
+    <developers>
+        <developer>
+            <id>kaziyas</id>
+            <name>Yaser Kazerooni</name>
+            <email>yaser.kazerooni@gmail.com</email>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>jersey-swagger-codegen-api-client</module>
+    </modules>
+
+    <properties>
+        <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- plugins -->
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
