@@ -20,10 +20,11 @@
 
     <modules>
         <module>jersey-swagger-codegen-api-client</module>
+        <!--module>jersey-swagger-codegen-app</module-->
     </modules>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -41,7 +42,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <release>11</release>
+                    <release>1.8</release>
                 </configuration>
             </plugin>
         </plugins>
