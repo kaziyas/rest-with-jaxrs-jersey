@@ -93,10 +93,12 @@ public class PetApiTest {
      */
     @Test
     public void getPetByIdTest() throws Exception {
-        Long petId = 22408871L;
-        Pet response = api.getPetById(petId);
+        Pet pet1 = createPet1();
+        api.addPet(pet1);
+        Long petId = pet1.getId();
 
-        Assert.assertEquals(pet.getId(), response.getId());
+        Pet response = api.getPetById(petId);
+        Assert.assertEquals(pet1.getId(), response.getId());
     }
 
     /**
