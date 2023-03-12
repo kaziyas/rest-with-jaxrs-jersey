@@ -53,14 +53,14 @@
 
                             <configOptions>
                                 <delegatePattern>true</delegatePattern>
-                                <dateLibrary>java8</dateLibrary>
+                                <dateLibrary>custom</dateLibrary>
                                 <java8>true</java8>
                             </configOptions>
                             <typeMappings>
-                                <typeMapping>OffsetDateTime=LocalDateTime</typeMapping>
+                                <typeMapping>DateTime=OffsetDateTime</typeMapping>
                             </typeMappings>
                             <importMappings>
-                                <importMapping>java.time.OffsetDateTime=java.time.LocalDateTime</importMapping>
+                                <importMapping>OffsetDateTime=java.time.OffsetDateTime</importMapping>
                             </importMappings>
                         </configuration>
                     </execution>
