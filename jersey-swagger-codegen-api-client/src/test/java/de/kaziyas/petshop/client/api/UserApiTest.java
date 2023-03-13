@@ -1,19 +1,26 @@
 package de.kaziyas.petshop.client.api;
 
+import de.kaziyas.petshop.client.invoker.ApiException;
 import de.kaziyas.petshop.client.model.User;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * API tests for UserApi
  */
-@Ignore
 public class UserApiTest {
 
     private final UserApi api = new UserApi();
 
+    private User user;
+    private User user1;
     /**
      * Create user
      * <p>
@@ -21,12 +28,20 @@ public class UserApiTest {
      *
      * @throws Exception if the Api call fails
      */
+
+    @Before
+    public void setup() {
+        this.user = createUser();
+        this.user1 = createUser1();
+    }
+
     @Test
     public void createUserTest() throws Exception {
-        User body = null;
-        api.createUser(body);
+        api.createUser(user);
 
-        // TODO: test validations
+        User response = api.getUserByName(user.getUsername());
+        Assert.assertEquals(user.getFirstName(), response.getFirstName());
+        Assert.assertEquals(user.getLastName(), response.getLastName());
     }
 
     /**
@@ -36,10 +51,14 @@ public class UserApiTest {
      */
     @Test
     public void createUsersWithArrayInputTest() throws Exception {
-        List<User> body = null;
-        api.createUsersWithArrayInput(body);
+        User[] body = {user, user1};
+        api.createUsersWithArrayInput(Arrays.asList(body));
 
-        // TODO: test validations
+        User response = api.getUserByName(user.getUsername());
+        Assert.assertEquals(user.getId(), response.getId());
+
+        response = api.getUserByName(user1.getUsername());
+        Assert.assertEquals(user1.getId(), response.getId());
     }
 
     /**
@@ -49,10 +68,16 @@ public class UserApiTest {
      */
     @Test
     public void createUsersWithListInputTest() throws Exception {
-        List<User> body = null;
+        List<User> body = new ArrayList<>();
+        body.add(user);
+        body.add(user1);
         api.createUsersWithListInput(body);
 
-        // TODO: test validations
+        User response = api.getUserByName(user.getUsername());
+        Assert.assertEquals(user.getId(), response.getId());
+
+        response = api.getUserByName(user1.getUsername());
+        Assert.assertEquals(user1.getId(), response.getId());
     }
 
     /**
@@ -62,12 +87,11 @@ public class UserApiTest {
      *
      * @throws Exception if the Api call fails
      */
-    @Test
+    @Test(expected = ApiException.class)
     public void deleteUserTest() throws Exception {
-        String username = null;
+        String username = user1.getUsername();
         api.deleteUser(username);
-
-        // TODO: test validations
+        api.getUserByName(username);
     }
 
     /**
@@ -77,10 +101,10 @@ public class UserApiTest {
      */
     @Test
     public void getUserByNameTest() throws Exception {
-        String username = null;
+        String username = user.getUsername();
         User response = api.getUserByName(username);
-
-        // TODO: test validations
+        Assert.assertEquals(user.getFirstName(), response.getFirstName());
+        Assert.assertEquals(user.getLastName(), response.getLastName());
     }
 
     /**
@@ -90,11 +114,11 @@ public class UserApiTest {
      */
     @Test
     public void loginUserTest() throws Exception {
-        String username = null;
-        String password = null;
+        String username = user.getUsername();
+        String password = user.getPassword();
         String response = api.loginUser(username, password);
-
-        // TODO: test validations
+        Assert.assertNotNull(response);
+        Assert.assertEquals("\"code\":200", response.substring(1, 11));
     }
 
     /**
@@ -105,8 +129,6 @@ public class UserApiTest {
     @Test
     public void logoutUserTest() throws Exception {
         api.logoutUser();
-
-        // TODO: test validations
     }
 
     /**
@@ -118,11 +140,35 @@ public class UserApiTest {
      */
     @Test
     public void updateUserTest() throws Exception {
-        String username = null;
-        User body = null;
-        api.updateUser(username, body);
-
-        // TODO: test validations
+        String newUsername = "yaser1541";
+        api.updateUser(newUsername, user);
     }
 
+    private User createUser() {
+        user = new User();
+        user.setId(19812015L);
+        user.setUsername("yaser");
+        user.setFirstName("yaser");
+        user.setLastName("kazerooni");
+        user.setEmail("yaser.kazerooni@gmail.com");
+        user.setPassword("A123456");
+        user.setPhone("1234567");
+        user.setUserStatus(-19812015);
+
+        return user;
+    }
+
+    private User createUser1() {
+        user1 = new User();
+        user1.setId(81164066L);
+        user1.setUsername("mehrad");
+        user1.setFirstName("mehrad");
+        user1.setLastName("kazerooni");
+        user1.setEmail("mehrad.kazerooni@gmail.com");
+        user1.setPassword("l654321");
+        user1.setPhone("654321");
+        user1.setUserStatus(-98741215);
+
+        return user1;
+    }
 }
